@@ -116,7 +116,7 @@ class App extends React.Component {
       </div>
       <header className="App-header">
         <div className= 'calc' >
-          <Input input={this.state.Memory}></Input>
+          <Input input={this.state.Memory}>A</Input>
           <Input input={this.state.input}></Input>
 
           <div className='row'>
@@ -146,7 +146,7 @@ class App extends React.Component {
             <Button class= 'Button' handleClick={this.AddInput}>.</Button>
             <Button class= 'Button' handleClick={this.AddInput}>0</Button>
 
-            <BClear  handleClear={() => this.setState({ input: "", previousOperand: "", currentOperand: "", proximo_numero: 'false', Memory: '', ponto: 'false'})} >AC</BClear>
+            <BClear  handleClear={() => this.setState({ input: "", previousOperand: "", currentOperand: "", proximo_numero: 'false', ponto: 'false'})} >AC</BClear>
 
             <Button class= 'Op' handleClick={this.Operation,this.AddInput} >+</Button>
           </div>

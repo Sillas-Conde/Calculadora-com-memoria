@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #242427;
 }
 
 .App-header {
@@ -42,6 +42,7 @@
   outline: 1px solid #888888
 }
 
+
 .Button{
   height: 4em;
   display: flex;
@@ -56,7 +57,7 @@
   
 }
 .operator {
-  background-color: #27262600;
+  background-color: #3ee927;
   color: #ffffff;
 }
 
