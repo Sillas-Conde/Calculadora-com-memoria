@@ -49,9 +49,12 @@ class App extends React.Component {
 
 
   AddInput = val => {
+
     if (val != '.') {
     this.setState({input: this.state.input + val});
     }
+
+
     if (val == '.' && this.state.ponto == 'false' && this.state.proximo_numero != 'true') {
     this.setState({input: this.state.input + val});
     this.setState({currentOperand: this.state.currentOperand + val})
@@ -64,39 +67,48 @@ class App extends React.Component {
     }
 
 
-    if (val != '+' && val != '-' && val != '=' && val !='*' && val !='÷' && val !='.' && this.state.proximo_numero == 'false' ) {
+    if (  val != '=' && val !='*' && val !='÷' && val !='.' && this.state.proximo_numero == 'false' ) {
       this.setState({currentOperand: this.state.currentOperand + val})
     }
-    if (val == '+' || val == '-' || val =='*' || val =='÷' ) {
+    if ( (val == '+' || val == '-' || val =='*' || val =='÷') && (this.state.currentOperand != '-' && this.state.currentOperand != '+' && this.state.currentOperand != '' && this.state.proximo_numero == 'false')) {
       this.setState({operation: val, proximo_numero: 'true', ponto: 'false'});
     }
 
     if (val == '='){
       this.setState({Memory: this.state.input + val})
       if (this.state.operation == '+') {
-      this.setState({input: parseFloat(this.state.currentOperand) + parseFloat(this.state.previousOperand)})
+      this.setState({input: parseFloat(this.state.currentOperand) + parseFloat(this.state.previousOperand), operation: ''})
+      this.setState({currentOperand: parseFloat(this.state.currentOperand) + parseFloat(this.state.previousOperand),previousOperand: ''})
       }
       if (this.state.operation == '-') {
         this.setState({input: parseFloat(this.state.currentOperand) - parseFloat(this.state.previousOperand)})
+        this.setState({currentOperand: parseFloat(this.state.currentOperand) - parseFloat(this.state.previousOperand),previousOperand: ''})
       }
       if (this.state.operation == '*') {
         this.setState({input: parseFloat(this.state.currentOperand) * parseFloat(this.state.previousOperand)})
+        this.setState({currentOperand: parseFloat(this.state.currentOperand) * parseFloat(this.state.previousOperand),previousOperand: ''})
       }
       if (this.state.operation == '÷') {
         this.setState({input: parseFloat(this.state.currentOperand) / parseFloat(this.state.previousOperand)})
+        this.setState({currentOperand: parseFloat(this.state.currentOperand) / parseFloat(this.state.previousOperand),previousOperand: ''})
       }
       this.setState({ponto:' false'})
       
     }
-    if (this.state.proximo_numero == 'true' && val != '=' && val != '.') {
+    if ((val == '-' || val == '+') && (this.state.previousOperand == '' && this.state.proximo_numero == 'true')) {
       this.setState({previousOperand: this.state.previousOperand + val}) 
-      }
+    }
+    if (this.state.proximo_numero == 'true' && val != '-' && val != '+' && val != '=' && val != '.' && val != '*' && val != '÷') {
+      this.setState({previousOperand: this.state.previousOperand + val}) 
+    }
     
     
   }
 
   Operation = val => {
+    if (this.state.currentOperand != '') {
     this.setState({operation: val, proximo_numero: 'true', ponto: 'false'});
+    }
   }
 
 
