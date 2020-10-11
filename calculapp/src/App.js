@@ -30,7 +30,8 @@ class App extends React.Component {
       Memory: '',
       Result: '',
       proximo_numero: 'false',
-      ponto: 'false'
+      ponto: 'false',
+      sinal: 'false'
       };
   }
   
@@ -56,9 +57,9 @@ class App extends React.Component {
 
 
     if (val == '.' && this.state.ponto == 'false' && this.state.proximo_numero != 'true') {
-    this.setState({input: this.state.input + val});
-    this.setState({currentOperand: this.state.currentOperand + val})
-    this.setState({ponto: 'true'});
+      this.setState({input: this.state.input + val});
+      this.setState({currentOperand: this.state.currentOperand + val})
+      this.setState({ponto: 'true'});
     }
     if (val == '.' && this.state.ponto == 'false' && this.state.proximo_numero == 'true') {
       this.setState({input: this.state.input + val});
@@ -70,43 +71,49 @@ class App extends React.Component {
     if (  val != '=' && val !='*' && val !='÷' && val !='.' && this.state.proximo_numero == 'false' ) {
       this.setState({currentOperand: this.state.currentOperand + val})
     }
-    if ( (val == '+' || val == '-' || val =='*' || val =='÷') && (this.state.currentOperand != '-' && this.state.currentOperand != '+' && this.state.currentOperand != '' && this.state.proximo_numero == 'false')) {
-      this.setState({operation: val, proximo_numero: 'true', ponto: 'false'});
+    if ((val == '-' || val == '+') && (this.state.sinal = 'false' && this.state.previousOperand == '' && this.state.proximo_numero == 'true')) {
+      this.setState({previousOperand: this.state.previousOperand + val, sinal: 'true'}) 
     }
 
-    if (val == '='){
-      this.setState({Memory: this.state.input + val})
-      if (this.state.operation == '+') {
-      this.setState({input: parseFloat(this.state.currentOperand) + parseFloat(this.state.previousOperand), operation: ''})
-      this.setState({currentOperand: parseFloat(this.state.currentOperand) + parseFloat(this.state.previousOperand),previousOperand: ''})
-      }
-      if (this.state.operation == '-') {
-        this.setState({input: parseFloat(this.state.currentOperand) - parseFloat(this.state.previousOperand)})
-        this.setState({currentOperand: parseFloat(this.state.currentOperand) - parseFloat(this.state.previousOperand),previousOperand: ''})
-      }
-      if (this.state.operation == '*') {
-        this.setState({input: parseFloat(this.state.currentOperand) * parseFloat(this.state.previousOperand)})
-        this.setState({currentOperand: parseFloat(this.state.currentOperand) * parseFloat(this.state.previousOperand),previousOperand: ''})
-      }
-      if (this.state.operation == '÷') {
-        this.setState({input: parseFloat(this.state.currentOperand) / parseFloat(this.state.previousOperand)})
-        this.setState({currentOperand: parseFloat(this.state.currentOperand) / parseFloat(this.state.previousOperand),previousOperand: ''})
-      }
-      this.setState({ponto:' false'})
-      
+    if ( (val == '+' || val == '-' || val =='*' || val =='÷') && (this.state.currentOperand != '-' && this.state.currentOperand != '+' && this.state.currentOperand != '' && this.state.operation =='')) {
+      this.setState({operation: val, proximo_numero: 'true', ponto: 'false'});
     }
-    if ((val == '-' || val == '+') && (this.state.previousOperand == '' && this.state.proximo_numero == 'true')) {
-      this.setState({previousOperand: this.state.previousOperand + val}) 
-    }
+    
     if (this.state.proximo_numero == 'true' && val != '-' && val != '+' && val != '=' && val != '.' && val != '*' && val != '÷') {
       this.setState({previousOperand: this.state.previousOperand + val}) 
     }
+
+
+
+    if (val == '='){
+      this.setState({Memory: this.state.input + val})
+      
+      if (this.state.operation == '+') {
+      this.setState({input: parseFloat(this.state.currentOperand) + parseFloat(this.state.previousOperand)})
+      this.setState({currentOperand: parseFloat(this.state.currentOperand) + parseFloat(this.state.previousOperand),previousOperand: '',operation: ''})
+      }
+      if (this.state.operation == '-') {
+        this.setState({input: parseFloat(this.state.currentOperand) - parseFloat(this.state.previousOperand)})
+        this.setState({currentOperand: parseFloat(this.state.currentOperand) - parseFloat(this.state.previousOperand),previousOperand: '',operation: ''})
+      }
+      if (this.state.operation == '*') {
+        this.setState({input: parseFloat(this.state.currentOperand) * parseFloat(this.state.previousOperand)})
+        this.setState({currentOperand: parseFloat(this.state.currentOperand) * parseFloat(this.state.previousOperand),previousOperand: '',operation: ''})
+      }
+      if (this.state.operation == '÷') {
+        this.setState({input: parseFloat(this.state.currentOperand) / parseFloat(this.state.previousOperand)})
+        this.setState({currentOperand: parseFloat(this.state.currentOperand) / parseFloat(this.state.previousOperand),previousOperand: '',operation: ''})
+      }
+      this.setState({ponto:' false'})
+      this.setState({previousOperand:'',operation:'',proximo_numero:'true'})
+    }
+    
     
     
   }
 
   Operation = val => {
-    if (this.state.currentOperand != '') {
+    if (this.state.currentOperand != '' && this.state.operation == '') {
     this.setState({operation: val, proximo_numero: 'true', ponto: 'false'});
     }
   }
@@ -132,7 +139,7 @@ class App extends React.Component {
           <Input input={this.state.input}></Input>
 
           <div className='row'>
-            <Button class= 'Op'  handleClick={this.AddInput}>=</Button>
+            <Button class= 'Op' handleClick={this.AddInput}>=</Button>
           </div>
 
 
@@ -140,25 +147,25 @@ class App extends React.Component {
             <Button class= 'Button' handleClick={this.AddInput}>7</Button>
             <Button class= 'Button' handleClick={this.AddInput}>8</Button>
             <Button class= 'Button' handleClick={this.AddInput}>9</Button>
-            <Button class= 'Op' handleClick={this.AddInput}>÷</Button>
+            <Button class= 'Op' handleClick={this.Operation,this.AddInput}>÷</Button>
           </div>
           <div className='row'>
             <Button class= 'Button' handleClick={this.AddInput}>4</Button>
             <Button class= 'Button' handleClick={this.AddInput}>5</Button>
             <Button class= 'Button' handleClick={this.AddInput}>6</Button>
-            <Button class= 'Op' handleClick={this.AddInput}>*</Button>
+            <Button class= 'Op' handleClick={this.Operation,this.AddInput}>*</Button>
           </div>
           <div className='row'>
             <Button class= 'Button' handleClick={this.AddInput}>1</Button>
             <Button class= 'Button' handleClick={this.AddInput}>2</Button>
             <Button class= 'Button' handleClick={this.AddInput}>3</Button>
-            <Button class= 'Op' handleClick={this.AddInput}>-</Button>
+            <Button class= 'Op' handleClick={this.Operation,this.AddInput}>-</Button>
           </div>
           <div className='row'>
             <Button class= 'Button' handleClick={this.AddInput}>.</Button>
             <Button class= 'Button' handleClick={this.AddInput}>0</Button>
 
-            <BClear  handleClear={() => this.setState({ input: "", previousOperand: "", currentOperand: "", proximo_numero: 'false', ponto: 'false'})} >AC</BClear>
+            <BClear  handleClear={() => this.setState({ input: "", previousOperand: "", currentOperand: "", proximo_numero: 'false', ponto: 'false',operation: ''})} >AC</BClear>
 
             <Button class= 'Op' handleClick={this.Operation,this.AddInput} >+</Button>
           </div>
