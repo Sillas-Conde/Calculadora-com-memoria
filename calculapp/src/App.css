@@ -1,0 +1,90 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+}
+
+.App-header {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc{
+  width: 400px;
+  height: 600px;
+  
+}
+
+.row {
+  display : flex;
+  width: 100%;
+  
+
+}
+
+.Title{
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Input{
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 1.4em;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.5em;
+  outline: 1px solid #888888
+}
+
+.Button{
+  height: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 1.4em;
+  background-color: #e0e1e6;
+  color: #888;
+  flex: 1;
+  outline: 1px solid #888
+  
+}
+.operator {
+  background-color: #fe9241;
+  color: #ffffff;
+}
+
+
+.Op {
+  height: 4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 1.4em;
+  flex: 1;
+  outline: 1px solid #888;
+  background-color: #fe9241;
+  color: white;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
