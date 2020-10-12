@@ -4,7 +4,7 @@
 }
 
 .App-header {
-  height: 100vh;
+  height: 150vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@
 
 
 .Button{
-  height: 4em;
+  height: 3em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,8 +56,57 @@
   outline: 1px solid #888
   
 }
+
+.Memoria{
+  height: 91.25vh;
+  width: 50vh;
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+  font-weight: bold;
+  font-size: 1.4em;
+  background-color: #000000;
+  color: #ffffff;
+  outline: 1px solid #888888;
+  flex-direction: column;
+}
+.InputM{
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: bold;
+  font-size: 1.4em;
+  background-color: #000000;
+  color: #ffffff;
+  
+  outline: 1px solid #888888
+
+}
+
+.ButtonM{
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: lighter;
+  font-size: 1.4em;
+  background-color: #e0e1e6;
+  color: #888;
+  flex: 1;
+  outline: 1px solid #888;
+  background-color: #18ecbe;
+  color: #ffffff;
+}
+
+.Linha{
+  display:flex;
+  flex-direction: row;
+}
+
+
 .operator {
-  background-color: #3ee927;
+  background-color: #4deee6;
   color: #ffffff;
 }
 
