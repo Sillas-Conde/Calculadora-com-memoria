@@ -45,15 +45,6 @@ class App extends React.Component {
   
   
 
-  Clear = val => {
-    if (val == 'AC') {
-      this.setState({
-        Registro: []
-      });
-    }
-  }
-
-
   AddInput = val => {
 
     if (val != '.') {
@@ -133,12 +124,6 @@ class App extends React.Component {
     }
     
   }
-
-  MC = val => {
-    this.registro.Registro.pop(this.registro.Registro.length - val)
-  }
-
-
   
 
   Operation = val => {
@@ -146,12 +131,6 @@ class App extends React.Component {
     this.setState({operation: val, proximo_numero: 'true', ponto: 'false'});
     }
   }
-
-
-  handleEqual = () => {
-    this.setState({ input: '' });
-  };
-
 
   render() {
     return(
@@ -209,28 +188,28 @@ class App extends React.Component {
         <div className= 'Memoria' >
           <InputM input2={this.registro.Registro[(this.registro.Registro.length) - 1]}></InputM>
           <div className='Linha'>
-            <ButtonM handleClick={() => this.registro.Registro.pop((this.registro.Registro.length) - 1)}>MC</ButtonM>
+            <ButtonM handleClick={() => this.registro.Registro.splice(((this.registro.Registro.length) - 1),1)}>MC</ButtonM>
             <ButtonM handleClick={()  => this.setState({
               input: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 1]),
               currentOperand: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 1])})}>MR</ButtonM>
           </div>
           <InputM input2={this.registro.Registro[(this.registro.Registro.length) - 2]}></InputM>
           <div className='Linha'>
-            <ButtonM handleClick={() => this.registro.Registro.pop((this.registro.Registro.length) - 2)}>MC</ButtonM>
+            <ButtonM handleClick={() => this.registro.Registro.splice(((this.registro.Registro.length) - 2),1)}>MC</ButtonM>
             <ButtonM handleClick={()  => this.setState({
               input: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 2]),
               currentOperand: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 2])})}>MR</ButtonM>
           </div>
           <InputM input2={this.registro.Registro[(this.registro.Registro.length) - 3]}></InputM>
           <div className='Linha'>
-            <ButtonM handleClick={() => this.registro.Registro.pop((this.registro.Registro.length) - 3)}>MC</ButtonM>
+            <ButtonM handleClick={() => this.registro.Registro.splice(((this.registro.Registro.length) - 3),1)}>MC</ButtonM>
             <ButtonM handleClick={()  => this.setState({
               input: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 3]),
               currentOperand: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 3])})}>MR</ButtonM>
           </div>
           <InputM input2={this.registro.Registro[(this.registro.Registro.length) - 4]}></InputM>
           <div className='Linha'>
-            <ButtonM handleClick={() => this.registro.Registro.pop((this.registro.Registro.length) - 4)}>MC</ButtonM>
+            <ButtonM handleClick={() => this.registro.Registro.splice(((this.registro.Registro.length) - 4),1)}>MC</ButtonM>
             <ButtonM handleClick={()  => this.setState({
               input: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 4]),
               currentOperand: parseFloat(this.registro.Registro[(this.registro.Registro.length) - 4])})}>MR</ButtonM>
